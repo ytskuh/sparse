@@ -1,18 +1,15 @@
-#include <vector>
 #include <iostream>
-#include <algorithm>
 
-#include "sparse.h"
+#include "sparse.hpp"
 
 using namespace std;
 using namespace sparse;
 
 int main() {
-    cout<<2;
-    DiaMatrix<int> a;
-    cout<<2;
-    a = diags(vector<int>{1, 2, 3}, vector<int>{-1, 0, 1}, 5, 5);
-    cout<<1;
+    DiaMatrix<double> a;
+
+    a = diags({1.1, 2.0, 3.0}, {-1, 0, 4}, 5, 5);
+
     a.print_();
     return 0;
 }
