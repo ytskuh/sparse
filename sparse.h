@@ -43,16 +43,31 @@ using std::cout;
 using std::endl;
 
 template <typename T>
-T& DiaMatrix<T>::operator()(size_t i, size_t j) {
+T& DiaMatrix<T>::operator()(std::size_t i, std::size_t j) {
     if(i >= rows_ || j >= cols_) {
         throw std::out_of_range("DiaMatrix::operator(): index out of range");
     }
-    for(size_t k = 0; k < offsets.size(); ++k) {
+    for(std::size_t k = 0; k < offsets.size(); ++k) {
         if(offsets[k] == i-j) {
             return data_[k][j];
         }
     }
-    return T{};
+    static T default_value{};
+    return default_value;
+}
+
+template <typename T>
+const T& DiaMatrix<T>::operator()(std::size_t i, std::size_t j) const {
+    if(i >= rows_ || j >= cols_) {
+        throw std::out_of_range("DiaMatrix::operator(): index out of range");
+    }
+    for(std::size_t k = 0; k < offsets.size(); ++k) {
+        if(offsets[k] == i-j) {
+            return data_[k][j];
+        }
+    }
+    static T default_value{};
+    return default_value;
 }
 
 template <typename T>
